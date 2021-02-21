@@ -1,8 +1,8 @@
-import {XAXisComponentOption, YAXisComponentOption, LegendComponentOption, SeriesOption} from 'echarts'
+import {XAXisComponentOption, YAXisComponentOption, LegendComponentOption, SeriesOption} from 'echarts/index'
 
 let defaultXaxiosOption: XAXisComponentOption | any= {
     type: 'category',
-    boundaryGap: false,
+    // boundaryGap: false,
     axisLine: {
         show: false
     },
@@ -10,13 +10,15 @@ let defaultXaxiosOption: XAXisComponentOption | any= {
         show: false
     },
     axisLabel: {
-        align: 'left',
+        align: 'middle',
+        interval: 0,
         padding: 4,
         margin: 5,
         width: 50,
-        overflow: 'breakAll'
+        height: 50,
+        overflow: 'breakAll',
+        lineOverflow: 'truncate'
     },
-    data: []
 }
 
 let defaultYAxiosOption: YAXisComponentOption = {
@@ -25,34 +27,37 @@ let defaultYAxiosOption: YAXisComponentOption = {
         margin: 30,
         align: 'right'
     },
+    splitNumber: 4
 }
 
 let defaultLegendOption: LegendComponentOption | any= {
+    show: true,
+    type: 'plain',
     icon: 'react',
     itemWidth: 8,
     itemHeight: 8,
-    top: '9%',
-    left: '2%'
+    top: '20%',
+    left: '2%',
 }
 
 let defaultBaseSeriesOption: SeriesOption = {
-    name: '',
     type: 'line',
-    data: []
 }
-let defaultSeriesOption:SeriesOption = Object.assign(defaultBaseSeriesOption, {})
-let defaultSmoothSeriesOption:SeriesOption = Object.assign(defaultBaseSeriesOption, {
+let defaultSeriesOption:SeriesOption = Object.assign({
+    symbol: 'none',
+}, defaultBaseSeriesOption)
+let defaultSmoothSeriesOption:SeriesOption = Object.assign( {
     symbol: 'none',
     smooth: true,
-})
-let defaultCoverSeriesOption:SeriesOption = Object.assign(defaultBaseSeriesOption, {
+}, defaultBaseSeriesOption)
+let defaultCoverSeriesOption:SeriesOption = Object.assign({
     stack: '总量',
     areaStyle: {},
     emphasis: {
         focus: 'series'
     },
-})
-let defaultCoverASmoothSeriesOption: SeriesOption = Object.assign(defaultBaseSeriesOption, {
+}, defaultBaseSeriesOption)
+let defaultCoverASmoothSeriesOption: SeriesOption = Object.assign({
     symbol: 'none',
     smooth: true,
     stack: '总量',
@@ -60,7 +65,7 @@ let defaultCoverASmoothSeriesOption: SeriesOption = Object.assign(defaultBaseSer
     emphasis: {
         focus: 'series'
     },
-})
+}, defaultBaseSeriesOption)
 export default {
     defaultXaxiosOption,
     defaultYAxiosOption,

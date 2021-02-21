@@ -1,27 +1,26 @@
 
 
-import * as echarts from 'echarts/core';
-import { EChartsOption, SeriesOption } from 'echarts'
+import * as echarts from 'echarts';
+import { EChartsOption, SeriesOption, ECharts } from 'echarts/index'
 
-import {
-    BarChart,
-    LineChart,
-} from 'echarts/charts';
-import {
-    TitleComponent,
-    GridComponent,
-} from 'echarts/components';
-import {
-    CanvasRenderer
-} from 'echarts/renderers';
-import { ECharts } from 'echarts/core';
+// import {
+//     BarChart,
+//     LineChart,
+// } from 'echarts/charts';
+// import {
+//     TitleComponent,
+//     GridComponent,
+// } from 'echarts/components';
+// import {
+//     CanvasRenderer
+// } from 'echarts/renderers';
 
 import {defaultTitleOption, defaultGridOption} from './option/index'
 import LineOption from './option/lineOption'
 
-echarts.use(
-    [TitleComponent, GridComponent, BarChart, LineChart, CanvasRenderer]
-);
+// echarts.use(
+//     [TitleComponent, GridComponent, BarChart, LineChart, CanvasRenderer]
+// );
 interface ChartData {
     title: string,
     xAxios: Array<string | Date>
@@ -29,7 +28,7 @@ interface ChartData {
 }
 // 初始化参数接口
 interface MiniOption {
-    dom: HTMLElement,
+    dom: HTMLDivElement,
     type?: 'smooth' | 'cover' | 'smoothAcover' | undefined,
     name?: string,
     vertical?: Boolean,
@@ -38,15 +37,15 @@ interface MiniOption {
     extralOption?: EChartsOption
 }
 class MiniEcharts {
-    miniEcharts: ECharts | undefined
-    constructor(dom: HTMLElement, theme: string = ''){
+    miniEcharts
+    constructor(dom: HTMLDivElement, theme: string = ''){
         this.initEchart(dom, theme)
     }
     //初始化echarts实例
-    private initEchart(dom: HTMLElement, theme: string = ''): void{
-        this.miniEcharts = echarts.init(dom, theme) 
+    private initEchart(dom: HTMLDivElement, theme: string = 'dark'): void{
+        this.miniEcharts = echarts.init(dom) 
     }
-    protected setOption(option: EChartsOption): void{
+    public setOption(option: EChartsOption): void{
         this.miniEcharts?.setOption(option)
     } 
     
@@ -60,7 +59,7 @@ function getSeriesOption(type: string | undefined): SeriesOption{
         }
 }
 export class MiniLineChart extends MiniEcharts {
-    echartOption!: EChartsOption
+    echartOption: EChartsOption = {}
     constructor(options: MiniOption){
         super(options.dom, options?.theme)
         this.initXAxis(options)
@@ -93,9 +92,12 @@ export class MiniLineChart extends MiniEcharts {
         this.echartOption.series = []
         if(seriesLength){
             for(let i = 0;i < seriesLength;i++){
-                seriesOption.data = option.data?.value[i].data
-                seriesOption.name = option.data?.value[i].name
-                this.echartOption.series.push(seriesOption)
+                const temp = {
+                    data: option.data?.value[i].data,
+                    name: option.data?.value[i].name
+                }
+                console.log(temp)
+                this.echartOption.series.push(Object.assign(temp, seriesOption))
             }
         }
     }
@@ -106,6 +108,8 @@ export class MiniLineChart extends MiniEcharts {
         } 
     }
     public render(){
+        console.log(JSON.stringify(this.echartOption))
+        console.log(this.echartOption)
         this.setOption(this.echartOption)
     }
 }

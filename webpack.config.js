@@ -36,7 +36,7 @@ module.exports = {
         splitChunks: {
           cacheGroups: {
             echarts: {
-              chunks: 'all',
+              chunks: 'initial',
               filename: 'js/echarts.min.js',
               test: /[\\/]echarts[\\/]/,
               priority: 1
