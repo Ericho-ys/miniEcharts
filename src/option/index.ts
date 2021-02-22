@@ -5,12 +5,16 @@ export let defaultTitleOption:TitleComponentOption = {
         fontWeight: 'bold'
     },
     top: '10%',
-    left: '2%'
+    left: '3%'
 }
 export let defaultGridOption:GridComponentOption = {
-    top: '35%',
-    right: '5%',
-    bottom: '5%',
-    left: '5%',
-    containLabel: true
+    top: '30%',
+    right: '10%',
+    bottom: '10%',
+    left: '12%',
 }
+export let defaultBorderGrid:GridComponentOption = Object.assign({
+    show: true,
+    borderWidth: 1,
+    borderColor: '#676D9E'
+}, defaultGridOption)

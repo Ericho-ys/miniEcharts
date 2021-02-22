@@ -2,7 +2,7 @@ import {XAXisComponentOption, YAXisComponentOption, LegendComponentOption, Serie
 
 let defaultXaxiosOption: XAXisComponentOption | any= {
     type: 'category',
-    // boundaryGap: false,
+    boundaryGap: false,
     axisLine: {
         show: false
     },
@@ -21,11 +21,20 @@ let defaultXaxiosOption: XAXisComponentOption | any= {
     },
 }
 
-let defaultYAxiosOption: YAXisComponentOption = {
+let defaultYAxiosOption: YAXisComponentOption | any= {
     type: 'value',
     axisLabel: {
-        margin: 30,
-        align: 'right'
+        margin: 10,
+        align: 'right',
+        formatter: function(_value: number){
+            let str = ''
+            if(_value > 1000){
+                str = parseFloat(Math.floor(_value / 1000).toFixed(1)) +'k'
+            }else{
+                str = _value + '' 
+            }
+            return str
+        }
     },
     splitNumber: 4
 }
@@ -37,7 +46,7 @@ let defaultLegendOption: LegendComponentOption | any= {
     itemWidth: 8,
     itemHeight: 8,
     top: '20%',
-    left: '2%',
+    left: '3%',
 }
 
 let defaultBaseSeriesOption: SeriesOption = {
@@ -52,7 +61,6 @@ let defaultSmoothSeriesOption:SeriesOption = Object.assign( {
 }, defaultBaseSeriesOption)
 let defaultCoverSeriesOption:SeriesOption = Object.assign({
     stack: '总量',
-    areaStyle: {},
     emphasis: {
         focus: 'series'
     },
@@ -61,19 +69,23 @@ let defaultCoverASmoothSeriesOption: SeriesOption = Object.assign({
     symbol: 'none',
     smooth: true,
     stack: '总量',
-    areaStyle: {},
     emphasis: {
         focus: 'series'
     },
 }, defaultBaseSeriesOption)
+
+export function getSeriesOption(type: string | undefined): SeriesOption{
+    switch (type){
+        case 'smooth': return defaultSmoothSeriesOption
+        case 'cover': return defaultCoverSeriesOption
+        case 'smoothAcover': defaultCoverASmoothSeriesOption
+        default: return defaultSeriesOption
+    }
+}
 export default {
     defaultXaxiosOption,
     defaultYAxiosOption,
     defaultLegendOption,
-    defaultSeriesOption,
-    defaultSmoothSeriesOption,
-    defaultCoverSeriesOption,
-    defaultCoverASmoothSeriesOption 
 }
 
 
