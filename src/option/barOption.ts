@@ -1,4 +1,4 @@
-import {XAXisComponentOption, YAXisComponentOption, LegendComponentOption, SeriesOption, number} from 'echarts/index'
+import {XAXisComponentOption, YAXisComponentOption, LegendComponentOption, SeriesOption} from 'echarts/index'
 
 let defaultXaxiosOption: XAXisComponentOption | any= {
     type: 'category',
@@ -32,6 +32,20 @@ let defaultVerticalXaios: XAXisComponentOption | any = {
             return str
         }  
     },
+    axisLine: {
+        show: false
+    },
+    axisTick: {
+        show: false
+    },
+    splitNumber: 5
+}
+let defaultVerticalRateXaios: XAXisComponentOption | any = {
+    type: 'value',  
+    axisLabel: {    
+        formatter: '{value}%'  
+    },
+    boundaryGap: ['0%', '1%'],
     axisLine: {
         show: false
     },
@@ -93,12 +107,18 @@ let defaultLegendOption: LegendComponentOption | any= {
 let defaultBaseSeriesOption: SeriesOption = {
     type: 'bar',
     barGap: '30%',
+}
+let defaultSeriesOption:SeriesOption = Object.assign({
     label: {
         show: false
     }
-}
-let defaultSeriesOption:SeriesOption = Object.assign({
-    
+}, defaultBaseSeriesOption)
+let defaultRateSeriesOption:SeriesOption = Object.assign({
+    label:{
+        show: true,
+        position: 'right',
+        formatter: '{c}%'
+    }
 }, defaultBaseSeriesOption)
 export function getBarWidth(type:string, length:number):string | number{
     // if(length > 1){
@@ -126,6 +146,8 @@ export default {
     defaultYAxiosOption,
     defaultLegendOption,
     defaultSeriesOption,
+    defaultRateSeriesOption,
     defaultVerticalXaios,
-    defaultVerticalYaios 
+    defaultVerticalYaios,
+    defaultVerticalRateXaios 
 }

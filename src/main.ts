@@ -26,7 +26,7 @@ const miniBarChart = new MiniBarChart({
     data: {
         title: '测试',
         axios: ['周一', '周二', '周三','周四', '周五', '周六'],
-        value: [{name: 'ceshi', data:[10002, 3000, 4000, 5000,1000, 200000]},], 
+        value: [{name: 'ceshi', data:[10, 30, 40, 50,10, 20]},], 
         //value: [{name: 'ceshi', data:[12, 3, 4, 5, 6, 7]}]
     }
 })

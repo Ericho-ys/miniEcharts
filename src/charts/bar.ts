@@ -20,6 +20,9 @@ export default class MiniBarChart extends MiniEcharts {
     private initXAxis(option: Mini.MiniOption): void {
         if(option.type){
             this.echartOption.xAxis = BarOption.defaultVerticalXaios
+            if(option.type === 'verticalRate'){
+                this.echartOption.xAxis = BarOption.defaultVerticalRateXaios
+            }
         }else{
             BarOption.defaultXaxiosOption.data = option.data?.axios
             this.echartOption.xAxis = BarOption.defaultXaxiosOption
@@ -74,11 +77,11 @@ export default class MiniBarChart extends MiniEcharts {
                             itemStyle: {
                                 color: barColor[index]
                             }
-                        } as any
-                    })
+                        } 
+                    }) as any
                     temp.data = arr
                 }
-                this.echartOption.series.push(Object.assign(temp, BarOption.defaultSeriesOption))
+                this.echartOption.series.push(Object.assign(temp, BarOption.defaultRateSeriesOption))
             }
         }
     }
