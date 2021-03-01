@@ -13,8 +13,13 @@ export let defaultGridOption:GridComponentOption = {
     bottom: '10%',
     left: '12%',
 }
+export let defaultPieGridOption:GridComponentOption = {
+    top: '50%',
+    right: '10%',
+    bottom: '10%',
+    left: '8%',
+}
 export let defaultBorderGrid:GridComponentOption = Object.assign({
     show: true,
-    borderWidth: 1,
-    borderColor: '#676D9E'
+    //borderColor: '#676D9E'
 }, defaultGridOption)

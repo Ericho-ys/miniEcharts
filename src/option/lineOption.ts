@@ -50,13 +50,16 @@ let defaultLegendOption: LegendComponentOption | any= {
 }
 
 let defaultBaseSeriesOption: SeriesOption = {
+    symbol: 'none',
     type: 'line',
+    lineStyle:{
+        width:2
+    }
 }
 let defaultSeriesOption:SeriesOption = Object.assign({
-    symbol: 'none',
+    
 }, defaultBaseSeriesOption)
 let defaultSmoothSeriesOption:SeriesOption = Object.assign( {
-    symbol: 'none',
     smooth: true,
 }, defaultBaseSeriesOption)
 let defaultCoverSeriesOption:SeriesOption = Object.assign({
@@ -66,7 +69,6 @@ let defaultCoverSeriesOption:SeriesOption = Object.assign({
     },
 }, defaultBaseSeriesOption)
 let defaultCoverASmoothSeriesOption: SeriesOption = Object.assign({
-    symbol: 'none',
     smooth: true,
     stack: '总量',
     emphasis: {
@@ -74,11 +76,11 @@ let defaultCoverASmoothSeriesOption: SeriesOption = Object.assign({
     },
 }, defaultBaseSeriesOption)
 
-export function getSeriesOption(type: string | undefined): SeriesOption{
+export function getSeriesOption(type: string): SeriesOption{
     switch (type){
         case 'smooth': return defaultSmoothSeriesOption
         case 'cover': return defaultCoverSeriesOption
-        case 'smoothAcover': defaultCoverASmoothSeriesOption
+        case 'smoothAcover': return defaultCoverASmoothSeriesOption
         default: return defaultSeriesOption
     }
 }
